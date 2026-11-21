@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+.screenshots/
+.trae/
+
+# Node tooling used only for document generation
+node_modules/
+package.json
+package-lock.json
+
+# Large generated artifacts
+reports/predictions*.csv
+!reports/predictions_example.csv
+mro_v3_synthetic.tar.gz*
+
+# Local-only archived documentation (not part of the English submission)
+docs/archive/

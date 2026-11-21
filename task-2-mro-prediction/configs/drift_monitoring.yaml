@@ -1,0 +1,58 @@
+dataset_version: v3
+
+# Reference window: training period (2022-01-01 to 2023-12-31). All drift comparisons use this window as the baseline.
+reference:
+  name: train_reference
+  split: train
+  date_start: "2022-01-01"
+  date_end: "2023-12-31"
+
+# Monitoring windows; the test window is for distribution monitoring only, with no rescoring and no model selection.
+windows:
+  - name: train_2022
+    split: train
+    date_start: "2022-01-01"
+    date_end: "2022-12-31"
+    role: baseline_stability
+  - name: train_2023
+    split: train
+    date_start: "2023-01-01"
+    date_end: "2023-12-31"
+    role: baseline_stability
+  - name: val_2024q1
+    split: val
+    date_start: "2024-01-01"
+    date_end: "2024-03-31"
+    role: production_simulation
+  - name: test_2024q2_q3
+    split: test
+    date_start: "2024-04-01"
+    date_end: "2024-09-30"
+    role: monitoring_only
+
+# Score drift uses saved val predictions as the reference distribution and reads only risk scores and alert flags.
+score_reference: val_2024q1
+score_prediction_files:
+  val_2024q1: reports/predictions_val_lightgbm.csv
+  test_2024q2_q3: reports/predictions_test_lightgbm.csv
+
+psi:
+  bins: 10
+  epsilon: 0.0001
+
+# Features that grow mechanically with time: their drift is an inevitable result of time progression and is interpreted as a separate group.
+structural_features:
+  - snapshot_cycle
+  - component_age_days
+  - component_age_cycles
+  - tsr_cycles
+  - operating_hours_since_install
+
+# PSI warning thresholds are initial suggested values and must be calibrated on real data.
+thresholds:
+  watch: 0.10
+  action: 0.25
+
+alert_burden:
+  max_alerts_per_100: 5.0
+  cooldown_cycles: 30

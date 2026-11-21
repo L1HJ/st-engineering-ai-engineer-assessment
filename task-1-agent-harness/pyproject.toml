@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "operations-agent-harness"
+version = "0.1.0"
+description = "A local operations assistant Agent Harness with explicit state and execution controls."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "openai>=1.55,<3",
+    "pydantic>=2.9,<3",
+    "pydantic-settings>=2.6,<3",
+    "SQLAlchemy>=2.0,<3",
+    "uvicorn>=0.32,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "httpx>=0.27,<1",
+    "pytest>=8,<10",
+    "pytest-asyncio>=0.24,<2",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q -m 'not kimi_smoke'"
+markers = [
+    "kimi_smoke: Explicit opt-in tests that call the real Kimi API.",
+]
+
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

@@ -1,0 +1,50 @@
+{
+  "audit": "temporal_label_window_overlap",
+  "read_only": true,
+  "temporal_test_metrics_read": false,
+  "models_retrained": false,
+  "generated_at_utc": "2026-11-21T08:12:50.616031+00:00",
+  "sources": {
+    "links": "data/audit/snapshot_event_links.csv",
+    "splits_dir": "data/splits/temporal"
+  },
+  "links": {
+    "total": 11368,
+    "within_30_cycles": 11368,
+    "same_split": 11235,
+    "cross_split": 133,
+    "cross_split_pairs": {
+      "train->val": 80,
+      "val->test": 30,
+      "test->observation": 23
+    }
+  },
+  "positive_snapshots": {
+    "train": {
+      "total": 4291,
+      "same_split_linked": 4211,
+      "cross_split_only": 80,
+      "cross_split_any": 80,
+      "cross_split_only_rate": 0.018644
+    },
+    "val": {
+      "total": 613,
+      "same_split_linked": 583,
+      "cross_split_only": 30,
+      "cross_split_any": 30,
+      "cross_split_only_rate": 0.04894
+    },
+    "test": {
+      "total": 1093,
+      "same_split_linked": 1070,
+      "cross_split_only": 23,
+      "cross_split_any": 23,
+      "cross_split_only_rate": 0.021043
+    }
+  },
+  "notes": [
+    "Only same-split links are eligible for event recall, so the event denominator itself is not contaminated.",
+    "Cross-split links mean a small share of training/validation targets are driven by events in the next split (label overlap, not feature leakage).",
+    "The frozen temporal test has already been consumed; this audit does not change the official model, threshold, or reported test result."
+  ]
+}

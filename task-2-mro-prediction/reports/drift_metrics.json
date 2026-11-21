@@ -1,0 +1,1368 @@
+{
+  "dataset_version": "v3",
+  "reference_window": {
+    "name": "train_reference",
+    "split": "train",
+    "date_start": "2022-01-01",
+    "date_end": "2023-12-31"
+  },
+  "psi_settings": {
+    "bins": 10,
+    "epsilon": 0.0001,
+    "watch": 0.1,
+    "action": 0.25
+  },
+  "scope": {
+    "purpose": "monitoring_only",
+    "temporal_test_read": true,
+    "temporal_test_rescored": false,
+    "temporal_test_used_for_selection": false,
+    "performance_metrics_computed": false
+  },
+  "windows": [
+    {
+      "window": "train_2022",
+      "role": "baseline_stability",
+      "split": "train",
+      "date_start": "2022-01-01",
+      "date_end": "2022-12-31",
+      "rows": 108730,
+      "action_features": 3,
+      "watch_features": 6,
+      "operational_action_features": 0,
+      "operational_watch_features": 5,
+      "max_psi": 1.414807,
+      "max_psi_feature": "snapshot_cycle",
+      "operational_max_psi": 0.20855,
+      "operational_max_psi_feature": "cumulative_faults",
+      "top_features": [
+        {
+          "feature": "snapshot_cycle",
+          "psi": 1.414807,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "component_age_days",
+          "psi": 0.997601,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "component_age_cycles",
+          "psi": 0.337988,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "cumulative_faults",
+          "psi": 0.20855,
+          "status": "watch",
+          "group": "operational"
+        },
+        {
+          "feature": "removal_count_history",
+          "psi": 0.144315,
+          "status": "watch",
+          "group": "operational"
+        }
+      ]
+    },
+    {
+      "window": "train_2023",
+      "role": "baseline_stability",
+      "split": "train",
+      "date_start": "2023-01-01",
+      "date_end": "2023-12-31",
+      "rows": 107228,
+      "action_features": 2,
+      "watch_features": 4,
+      "operational_action_features": 0,
+      "operational_watch_features": 3,
+      "max_psi": 2.206119,
+      "max_psi_feature": "component_age_days",
+      "operational_max_psi": 0.163579,
+      "operational_max_psi_feature": "cumulative_faults",
+      "top_features": [
+        {
+          "feature": "component_age_days",
+          "psi": 2.206119,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "snapshot_cycle",
+          "psi": 1.199106,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "cumulative_faults",
+          "psi": 0.163579,
+          "status": "watch",
+          "group": "operational"
+        },
+        {
+          "feature": "component_age_cycles",
+          "psi": 0.135049,
+          "status": "watch",
+          "group": "structural_time"
+        },
+        {
+          "feature": "sensor_oil_debris",
+          "psi": 0.110339,
+          "status": "watch",
+          "group": "operational"
+        }
+      ]
+    },
+    {
+      "window": "val_2024q1",
+      "role": "production_simulation",
+      "split": "val",
+      "date_start": "2024-01-01",
+      "date_end": "2024-03-31",
+      "rows": 28256,
+      "action_features": 9,
+      "watch_features": 4,
+      "operational_action_features": 5,
+      "operational_watch_features": 4,
+      "max_psi": 6.853235,
+      "max_psi_feature": "component_age_days",
+      "operational_max_psi": 0.51263,
+      "operational_max_psi_feature": "cumulative_faults",
+      "top_features": [
+        {
+          "feature": "component_age_days",
+          "psi": 6.853235,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "snapshot_cycle",
+          "psi": 3.607635,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "component_age_cycles",
+          "psi": 0.552996,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "cumulative_faults",
+          "psi": 0.51263,
+          "status": "action",
+          "group": "operational"
+        },
+        {
+          "feature": "sensor_oil_debris",
+          "psi": 0.34117,
+          "status": "action",
+          "group": "operational"
+        }
+      ]
+    },
+    {
+      "window": "test_2024q2_q3",
+      "role": "monitoring_only",
+      "split": "test",
+      "date_start": "2024-04-01",
+      "date_end": "2024-09-30",
+      "rows": 55260,
+      "action_features": 11,
+      "watch_features": 2,
+      "operational_action_features": 7,
+      "operational_watch_features": 2,
+      "max_psi": 6.908637,
+      "max_psi_feature": "component_age_days",
+      "operational_max_psi": 0.74331,
+      "operational_max_psi_feature": "cumulative_faults",
+      "top_features": [
+        {
+          "feature": "component_age_days",
+          "psi": 6.908637,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "snapshot_cycle",
+          "psi": 4.732634,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "component_age_cycles",
+          "psi": 0.841513,
+          "status": "action",
+          "group": "structural_time"
+        },
+        {
+          "feature": "cumulative_faults",
+          "psi": 0.74331,
+          "status": "action",
+          "group": "operational"
+        },
+        {
+          "feature": "sensor_oil_debris",
+          "psi": 0.471997,
+          "status": "action",
+          "group": "operational"
+        }
+      ]
+    }
+  ],
+  "features": [
+    {
+      "window": "train_2022",
+      "feature": "snapshot_cycle",
+      "type": "integer",
+      "group": "structural_time",
+      "psi": 1.414807,
+      "ks": 0.339047,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "aircraft_model",
+      "type": "category",
+      "group": "operational",
+      "psi": 1.5e-05,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "component_type",
+      "type": "category",
+      "group": "operational",
+      "psi": 4e-06,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "operator",
+      "type": "category",
+      "group": "operational",
+      "psi": 1.3e-05,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "component_age_cycles",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 0.337988,
+      "ks": 0.145235,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "component_age_days",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 0.997601,
+      "ks": 0.32561,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "tsr_cycles",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 2.1e-05,
+      "ks": 0.001356,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "operating_hours_since_install",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 0.144184,
+      "ks": 0.11985,
+      "status": "watch",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "sensor_vibration",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.115307,
+      "ks": 0.129663,
+      "status": "watch",
+      "reference_missing_rate": 0.087744,
+      "current_missing_rate": 0.083436
+    },
+    {
+      "window": "train_2022",
+      "feature": "sensor_temp",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.073786,
+      "ks": 0.111563,
+      "status": "stable",
+      "reference_missing_rate": 0.07551,
+      "current_missing_rate": 0.072151
+    },
+    {
+      "window": "train_2022",
+      "feature": "sensor_pressure",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.063991,
+      "ks": 0.108262,
+      "status": "stable",
+      "reference_missing_rate": 0.433422,
+      "current_missing_rate": 0.434287
+    },
+    {
+      "window": "train_2022",
+      "feature": "sensor_oil_debris",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.132386,
+      "ks": 0.147097,
+      "status": "watch",
+      "reference_missing_rate": 0.645954,
+      "current_missing_rate": 0.64422
+    },
+    {
+      "window": "train_2022",
+      "feature": "sensor_rpm_deviation",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.087567,
+      "ks": 0.122879,
+      "status": "stable",
+      "reference_missing_rate": 0.558076,
+      "current_missing_rate": 0.556047
+    },
+    {
+      "window": "train_2022",
+      "feature": "sensor_exhaust_temp",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.100844,
+      "ks": 0.136619,
+      "status": "watch",
+      "reference_missing_rate": 0.820863,
+      "current_missing_rate": 0.820178
+    },
+    {
+      "window": "train_2022",
+      "feature": "fault_code_last",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.00035,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "fault_count_last_30",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.039371,
+      "ks": 0.087977,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "fault_severity_last",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.013551,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.029413,
+      "current_missing_rate": 0.028759
+    },
+    {
+      "window": "train_2022",
+      "feature": "last_maint_cycles_ago",
+      "type": "integer",
+      "group": "operational",
+      "psi": 2.5e-05,
+      "ks": 0.001306,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "last_maint_type",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.0,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "removal_count_history",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.144315,
+      "ks": 0.098468,
+      "status": "watch",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "cumulative_faults",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.20855,
+      "ks": 0.150122,
+      "status": "watch",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "flight_cycles_last_30",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.000704,
+      "ks": 0.008033,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2022",
+      "feature": "avg_flight_hours",
+      "type": "float",
+      "group": "operational",
+      "psi": 1.3e-05,
+      "ks": 0.001763,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "snapshot_cycle",
+      "type": "integer",
+      "group": "structural_time",
+      "psi": 1.199106,
+      "ks": 0.343797,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "aircraft_model",
+      "type": "category",
+      "group": "operational",
+      "psi": 1.6e-05,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "component_type",
+      "type": "category",
+      "group": "operational",
+      "psi": 5e-06,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "operator",
+      "type": "category",
+      "group": "operational",
+      "psi": 1.3e-05,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "component_age_cycles",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 0.135049,
+      "ks": 0.147269,
+      "status": "watch",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "component_age_days",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 2.206119,
+      "ks": 0.330171,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "tsr_cycles",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 2.2e-05,
+      "ks": 0.001375,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "operating_hours_since_install",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 0.096199,
+      "ks": 0.121528,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "sensor_vibration",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.09179,
+      "ks": 0.132736,
+      "status": "stable",
+      "reference_missing_rate": 0.087744,
+      "current_missing_rate": 0.092112
+    },
+    {
+      "window": "train_2023",
+      "feature": "sensor_temp",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.066568,
+      "ks": 0.113956,
+      "status": "stable",
+      "reference_missing_rate": 0.07551,
+      "current_missing_rate": 0.078916
+    },
+    {
+      "window": "train_2023",
+      "feature": "sensor_pressure",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.058225,
+      "ks": 0.109441,
+      "status": "stable",
+      "reference_missing_rate": 0.433422,
+      "current_missing_rate": 0.432546
+    },
+    {
+      "window": "train_2023",
+      "feature": "sensor_oil_debris",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.110339,
+      "ks": 0.150637,
+      "status": "watch",
+      "reference_missing_rate": 0.645954,
+      "current_missing_rate": 0.647713
+    },
+    {
+      "window": "train_2023",
+      "feature": "sensor_rpm_deviation",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.079213,
+      "ks": 0.125758,
+      "status": "stable",
+      "reference_missing_rate": 0.558076,
+      "current_missing_rate": 0.560134
+    },
+    {
+      "window": "train_2023",
+      "feature": "sensor_exhaust_temp",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.106798,
+      "ks": 0.139603,
+      "status": "watch",
+      "reference_missing_rate": 0.820863,
+      "current_missing_rate": 0.821558
+    },
+    {
+      "window": "train_2023",
+      "feature": "fault_code_last",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.000352,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "fault_count_last_30",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.03738,
+      "ks": 0.08921,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "fault_severity_last",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.014307,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.029413,
+      "current_missing_rate": 0.030076
+    },
+    {
+      "window": "train_2023",
+      "feature": "last_maint_cycles_ago",
+      "type": "integer",
+      "group": "operational",
+      "psi": 2.6e-05,
+      "ks": 0.001324,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "last_maint_type",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.0,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "removal_count_history",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.094116,
+      "ks": 0.099847,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "cumulative_faults",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.163579,
+      "ks": 0.152224,
+      "status": "watch",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "flight_cycles_last_30",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.000713,
+      "ks": 0.008145,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "train_2023",
+      "feature": "avg_flight_hours",
+      "type": "float",
+      "group": "operational",
+      "psi": 1.3e-05,
+      "ks": 0.001788,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "snapshot_cycle",
+      "type": "integer",
+      "group": "structural_time",
+      "psi": 3.607635,
+      "ks": 0.599761,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "aircraft_model",
+      "type": "category",
+      "group": "operational",
+      "psi": 9.8e-05,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "component_type",
+      "type": "category",
+      "group": "operational",
+      "psi": 1.4e-05,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "operator",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.000166,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "component_age_cycles",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 0.552996,
+      "ks": 0.278397,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "component_age_days",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 6.853235,
+      "ks": 0.806555,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "tsr_cycles",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 9.4e-05,
+      "ks": 0.004248,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "operating_hours_since_install",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 0.278378,
+      "ks": 0.220957,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "sensor_vibration",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.310644,
+      "ks": 0.238172,
+      "status": "action",
+      "reference_missing_rate": 0.087744,
+      "current_missing_rate": 0.095236
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "sensor_temp",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.208548,
+      "ks": 0.19864,
+      "status": "watch",
+      "reference_missing_rate": 0.07551,
+      "current_missing_rate": 0.082177
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "sensor_pressure",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.174186,
+      "ks": 0.184563,
+      "status": "watch",
+      "reference_missing_rate": 0.433422,
+      "current_missing_rate": 0.437358
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "sensor_oil_debris",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.34117,
+      "ks": 0.261901,
+      "status": "action",
+      "reference_missing_rate": 0.645954,
+      "current_missing_rate": 0.650446
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "sensor_rpm_deviation",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.240771,
+      "ks": 0.218508,
+      "status": "watch",
+      "reference_missing_rate": 0.558076,
+      "current_missing_rate": 0.56427
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "sensor_exhaust_temp",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.299278,
+      "ks": 0.231296,
+      "status": "action",
+      "reference_missing_rate": 0.820863,
+      "current_missing_rate": 0.823648
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "fault_code_last",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.002916,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "fault_count_last_30",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.119131,
+      "ks": 0.156108,
+      "status": "watch",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "fault_severity_last",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.043543,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.029413,
+      "current_missing_rate": 0.032206
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "last_maint_cycles_ago",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.0001,
+      "ks": 0.004055,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "last_maint_type",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.0,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "removal_count_history",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.283193,
+      "ks": 0.176706,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "cumulative_faults",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.51263,
+      "ks": 0.262553,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "flight_cycles_last_30",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.004998,
+      "ks": 0.023387,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "val_2024q1",
+      "feature": "avg_flight_hours",
+      "type": "float",
+      "group": "operational",
+      "psi": 7.3e-05,
+      "ks": 0.003282,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "snapshot_cycle",
+      "type": "integer",
+      "group": "structural_time",
+      "psi": 4.732634,
+      "ks": 0.696147,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "aircraft_model",
+      "type": "category",
+      "group": "operational",
+      "psi": 9.8e-05,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "component_type",
+      "type": "category",
+      "group": "operational",
+      "psi": 2.5e-05,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "operator",
+      "type": "category",
+      "group": "operational",
+      "psi": 2.9e-05,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "component_age_cycles",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 0.841513,
+      "ks": 0.348213,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "component_age_days",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 6.908637,
+      "ks": 0.85643,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "tsr_cycles",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 0.000153,
+      "ks": 0.002989,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "operating_hours_since_install",
+      "type": "float",
+      "group": "structural_time",
+      "psi": 0.442255,
+      "ks": 0.276521,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "sensor_vibration",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.418043,
+      "ks": 0.28385,
+      "status": "action",
+      "reference_missing_rate": 0.087744,
+      "current_missing_rate": 0.097521
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "sensor_temp",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.276158,
+      "ks": 0.229205,
+      "status": "action",
+      "reference_missing_rate": 0.07551,
+      "current_missing_rate": 0.089649
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "sensor_pressure",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.226786,
+      "ks": 0.21302,
+      "status": "watch",
+      "reference_missing_rate": 0.433422,
+      "current_missing_rate": 0.437658
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "sensor_oil_debris",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.471997,
+      "ks": 0.309234,
+      "status": "action",
+      "reference_missing_rate": 0.645954,
+      "current_missing_rate": 0.653891
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "sensor_rpm_deviation",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.328307,
+      "ks": 0.255186,
+      "status": "action",
+      "reference_missing_rate": 0.558076,
+      "current_missing_rate": 0.565291
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "sensor_exhaust_temp",
+      "type": "float",
+      "group": "operational",
+      "psi": 0.376635,
+      "ks": 0.253856,
+      "status": "action",
+      "reference_missing_rate": 0.820863,
+      "current_missing_rate": 0.824593
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "fault_code_last",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.00259,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "fault_count_last_30",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.155276,
+      "ks": 0.176998,
+      "status": "watch",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "fault_severity_last",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.05724,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.029413,
+      "current_missing_rate": 0.029786
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "last_maint_cycles_ago",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.000167,
+      "ks": 0.002761,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "last_maint_type",
+      "type": "category",
+      "group": "operational",
+      "psi": 0.0,
+      "ks": null,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "removal_count_history",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.368997,
+      "ks": 0.208124,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "cumulative_faults",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.74331,
+      "ks": 0.312903,
+      "status": "action",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "flight_cycles_last_30",
+      "type": "integer",
+      "group": "operational",
+      "psi": 0.000807,
+      "ks": 0.009173,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    },
+    {
+      "window": "test_2024q2_q3",
+      "feature": "avg_flight_hours",
+      "type": "float",
+      "group": "operational",
+      "psi": 3e-05,
+      "ks": 0.002522,
+      "status": "stable",
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    }
+  ],
+  "score_drift": {
+    "comparisons": {
+      "test_2024q2_q3": {
+        "reference": "val_2024q1",
+        "psi": 0.000987,
+        "reference_summary": {
+          "n_snapshots": 28256,
+          "score_mean": 0.037892,
+          "score_median": 0.014305,
+          "score_p95": 0.291618,
+          "score_max": 0.498549,
+          "alert_snapshot_rate": 0.092051
+        },
+        "current_summary": {
+          "n_snapshots": 55260,
+          "score_mean": 0.038853,
+          "score_median": 0.014305,
+          "score_p95": 0.322857,
+          "score_max": 0.496448,
+          "alert_snapshot_rate": 0.092544
+        }
+      }
+    },
+    "monthly": {
+      "val_2024q1": [
+        {
+          "month": "2024-01",
+          "snapshots": 10763,
+          "alert_snapshots": 996,
+          "alert_episodes": 413,
+          "active_component_windows": 8258,
+          "alerts_per_100_active": 5.001211,
+          "score_mean": 0.038236,
+          "score_p95": 0.313779,
+          "within_budget": false,
+          "score_psi_vs_reference": 0.0
+        },
+        {
+          "month": "2024-02",
+          "snapshots": 8574,
+          "alert_snapshots": 836,
+          "alert_episodes": 260,
+          "active_component_windows": 7093,
+          "alerts_per_100_active": 3.665586,
+          "score_mean": 0.038801,
+          "score_p95": 0.305033,
+          "within_budget": true,
+          "score_psi_vs_reference": 0.0
+        },
+        {
+          "month": "2024-03",
+          "snapshots": 8919,
+          "alert_snapshots": 769,
+          "alert_episodes": 237,
+          "active_component_windows": 7447,
+          "alerts_per_100_active": 3.18249,
+          "score_mean": 0.036601,
+          "score_p95": 0.232179,
+          "within_budget": true,
+          "score_psi_vs_reference": 0.0
+        }
+      ],
+      "test_2024q2_q3": [
+        {
+          "month": "2024-04",
+          "snapshots": 10460,
+          "alert_snapshots": 987,
+          "alert_episodes": 394,
+          "active_component_windows": 8064,
+          "alerts_per_100_active": 4.885913,
+          "score_mean": 0.038935,
+          "score_p95": 0.320708,
+          "within_budget": true,
+          "score_psi_vs_reference": 0.001524
+        },
+        {
+          "month": "2024-05",
+          "snapshots": 9199,
+          "alert_snapshots": 895,
+          "alert_episodes": 247,
+          "active_component_windows": 7644,
+          "alerts_per_100_active": 3.231293,
+          "score_mean": 0.03963,
+          "score_p95": 0.324498,
+          "within_budget": true,
+          "score_psi_vs_reference": 0.000848
+        },
+        {
+          "month": "2024-06",
+          "snapshots": 8724,
+          "alert_snapshots": 813,
+          "alert_episodes": 224,
+          "active_component_windows": 7212,
+          "alerts_per_100_active": 3.105935,
+          "score_mean": 0.039546,
+          "score_p95": 0.335415,
+          "within_budget": true,
+          "score_psi_vs_reference": 0.001639
+        },
+        {
+          "month": "2024-07",
+          "snapshots": 9121,
+          "alert_snapshots": 809,
+          "alert_episodes": 228,
+          "active_component_windows": 7554,
+          "alerts_per_100_active": 3.018268,
+          "score_mean": 0.038477,
+          "score_p95": 0.322857,
+          "within_budget": true,
+          "score_psi_vs_reference": 0.000746
+        },
+        {
+          "month": "2024-08",
+          "snapshots": 8973,
+          "alert_snapshots": 819,
+          "alert_episodes": 222,
+          "active_component_windows": 7484,
+          "alerts_per_100_active": 2.966328,
+          "score_mean": 0.037923,
+          "score_p95": 0.296366,
+          "within_budget": true,
+          "score_psi_vs_reference": 0.001084
+        },
+        {
+          "month": "2024-09",
+          "snapshots": 8783,
+          "alert_snapshots": 791,
+          "alert_episodes": 211,
+          "active_component_windows": 7318,
+          "alerts_per_100_active": 2.883301,
+          "score_mean": 0.038595,
+          "score_p95": 0.32859,
+          "within_budget": true,
+          "score_psi_vs_reference": 0.001227
+        }
+      ]
+    }
+  }
+}

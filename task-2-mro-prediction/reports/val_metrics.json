@@ -1,0 +1,269 @@
+{
+  "models": {
+    "logistic_regression": {
+      "split": "val",
+      "threshold": 0.7953625805980529,
+      "n_snapshots": 28256,
+      "n_positive_snapshots": 613,
+      "roc_auc": 0.9580544508316504,
+      "pr_auc": 0.24018809484048248,
+      "snapshot_recall": 0.7455138662316476,
+      "snapshot_precision": 0.23186199898528664,
+      "snapshot_f1": 0.35371517027863775,
+      "snapshot_alert_rate": 0.06975509626274065,
+      "alert_episode_count": 988,
+      "active_component_window_count": 22094,
+      "alerts_per_100_active": 4.471802299266769,
+      "detected_event_count": 517,
+      "actual_event_count": 548,
+      "event_recall": 0.9434306569343066,
+      "first_warning_cycles": {
+        "count": 517,
+        "min": 0.0,
+        "p25": 4.1795933907351355,
+        "median": 12.45433197607963,
+        "p75": 21.95689498129559,
+        "max": 29.9689288461027
+      },
+      "candidate": "lr_c_1"
+    },
+    "lightgbm": {
+      "split": "val",
+      "threshold": 0.05461588446029929,
+      "n_snapshots": 28256,
+      "n_positive_snapshots": 613,
+      "roc_auc": 0.9723930002663297,
+      "pr_auc": 0.3144028688403573,
+      "snapshot_recall": 0.9608482871125612,
+      "snapshot_precision": 0.22645136485966935,
+      "snapshot_f1": 0.36652146857498447,
+      "snapshot_alert_rate": 0.09205124575311438,
+      "alert_episode_count": 910,
+      "active_component_window_count": 22094,
+      "alerts_per_100_active": 4.118765275640445,
+      "detected_event_count": 548,
+      "actual_event_count": 548,
+      "event_recall": 1.0,
+      "first_warning_cycles": {
+        "count": 548,
+        "min": 0.0,
+        "p25": 9.290350064181894,
+        "median": 16.219708248177994,
+        "p75": 23.057835820335526,
+        "max": 29.9689288461027
+      },
+      "candidate": "lgbm_15_leaves"
+    }
+  },
+  "sanity_checks": {
+    "zero_scores": {
+      "split": "val",
+      "threshold": 0.5,
+      "n_snapshots": 28256,
+      "n_positive_snapshots": 613,
+      "roc_auc": 0.5,
+      "pr_auc": 0.021694507361268402,
+      "snapshot_recall": 0.0,
+      "snapshot_precision": 0.0,
+      "snapshot_f1": 0.0,
+      "snapshot_alert_rate": 0.0,
+      "alert_episode_count": 0,
+      "active_component_window_count": 22094,
+      "alerts_per_100_active": 0.0,
+      "detected_event_count": 0,
+      "actual_event_count": 548,
+      "event_recall": 0.0,
+      "first_warning_cycles": {
+        "count": 0,
+        "min": null,
+        "p25": null,
+        "median": null,
+        "p75": null,
+        "max": null
+      }
+    },
+    "oracle_linked_alerts": {
+      "split": "val",
+      "threshold": 0.5,
+      "n_snapshots": 28256,
+      "n_positive_snapshots": 613,
+      "roc_auc": 0.9656180859677977,
+      "pr_auc": 0.4913076888961505,
+      "snapshot_recall": 0.9510603588907015,
+      "snapshot_precision": 0.515473032714412,
+      "snapshot_f1": 0.6685779816513762,
+      "snapshot_alert_rate": 0.04002689694224235,
+      "alert_episode_count": 548,
+      "active_component_window_count": 22094,
+      "alerts_per_100_active": 2.4803113967593013,
+      "detected_event_count": 548,
+      "actual_event_count": 548,
+      "event_recall": 1.0,
+      "first_warning_cycles": {
+        "count": 548,
+        "min": 0.0,
+        "p25": 10.362122740579707,
+        "median": 17.176459715785768,
+        "p75": 23.344087682861865,
+        "max": 29.9689288461027
+      }
+    },
+    "single_feature": {
+      "features": [
+        {
+          "feature": "sensor_temp",
+          "val_roc_auc": 0.9471060141719532
+        },
+        {
+          "feature": "sensor_vibration",
+          "val_roc_auc": 0.9469571811040545
+        },
+        {
+          "feature": "fault_count_last_30",
+          "val_roc_auc": 0.836288936562944
+        },
+        {
+          "feature": "removal_count_history",
+          "val_roc_auc": 0.8273662111993165
+        },
+        {
+          "feature": "sensor_pressure",
+          "val_roc_auc": 0.815431770218267
+        },
+        {
+          "feature": "operating_hours_since_install",
+          "val_roc_auc": 0.775054368035142
+        },
+        {
+          "feature": "component_age_cycles",
+          "val_roc_auc": 0.7672029220852988
+        },
+        {
+          "feature": "cumulative_faults",
+          "val_roc_auc": 0.7600188348778552
+        },
+        {
+          "feature": "sensor_rpm_deviation",
+          "val_roc_auc": 0.7355293626929084
+        },
+        {
+          "feature": "fault_severity_last",
+          "val_roc_auc": 0.7223746026815092
+        },
+        {
+          "feature": "component_age_days",
+          "val_roc_auc": 0.7201951896703949
+        },
+        {
+          "feature": "component_type",
+          "val_roc_auc": 0.7024868577509364
+        },
+        {
+          "feature": "sensor_oil_debris",
+          "val_roc_auc": 0.6633874016761955
+        },
+        {
+          "feature": "sensor_exhaust_temp",
+          "val_roc_auc": 0.5607998130911607
+        },
+        {
+          "feature": "snapshot_cycle",
+          "val_roc_auc": 0.5506116820739186
+        },
+        {
+          "feature": "aircraft_model",
+          "val_roc_auc": 0.5446115318245169
+        },
+        {
+          "feature": "last_maint_cycles_ago",
+          "val_roc_auc": 0.5422651979836837
+        },
+        {
+          "feature": "tsr_cycles",
+          "val_roc_auc": 0.5421724576322949
+        },
+        {
+          "feature": "avg_flight_hours",
+          "val_roc_auc": 0.5371901201989311
+        },
+        {
+          "feature": "fault_code_last",
+          "val_roc_auc": 0.5100429273044886
+        },
+        {
+          "feature": "operator",
+          "val_roc_auc": 0.5086771094918613
+        },
+        {
+          "feature": "flight_cycles_last_30",
+          "val_roc_auc": 0.5085720057274175
+        },
+        {
+          "feature": "last_maint_type",
+          "val_roc_auc": 0.5
+        }
+      ],
+      "passed": true
+    },
+    "simple_baseline": {
+      "split": "val",
+      "threshold": 0.80208087951148,
+      "n_snapshots": 28256,
+      "n_positive_snapshots": 613,
+      "roc_auc": 0.8376634589265287,
+      "pr_auc": 0.06208596799025554,
+      "snapshot_recall": 0.3181076672104405,
+      "snapshot_precision": 0.06022235948116121,
+      "snapshot_f1": 0.10127239678005713,
+      "snapshot_alert_rate": 0.1145951302378256,
+      "alert_episode_count": 994,
+      "active_component_window_count": 22094,
+      "alerts_per_100_active": 4.498958993391871,
+      "detected_event_count": 210,
+      "actual_event_count": 548,
+      "event_recall": 0.38321167883211676,
+      "first_warning_cycles": {
+        "count": 210,
+        "min": 0.0,
+        "p25": 4.669991587335517,
+        "median": 13.455834818144467,
+        "p75": 22.563964427898213,
+        "max": 29.9689288461027
+      }
+    },
+    "shuffled_labels": {
+      "split": "val",
+      "threshold": 1.0,
+      "n_snapshots": 28256,
+      "n_positive_snapshots": 613,
+      "roc_auc": 0.509128034738417,
+      "pr_auc": 0.027648343802545345,
+      "snapshot_recall": 0.0,
+      "snapshot_precision": 0.0,
+      "snapshot_f1": 0.0,
+      "snapshot_alert_rate": 0.0,
+      "alert_episode_count": 0,
+      "active_component_window_count": 22094,
+      "alerts_per_100_active": 0.0,
+      "detected_event_count": 0,
+      "actual_event_count": 548,
+      "event_recall": 0.0,
+      "first_warning_cycles": {
+        "count": 0,
+        "min": null,
+        "p25": null,
+        "median": null,
+        "p75": null,
+        "max": null
+      },
+      "passed": true
+    },
+    "passed": true
+  },
+  "internal_gate": {
+    "recall_passed": true,
+    "alerts_passed": true,
+    "passed": true,
+    "test_permitted": true
+  }
+}

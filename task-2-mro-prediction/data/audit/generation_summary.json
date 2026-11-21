@@ -1,0 +1,77 @@
+{
+  "dataset_version": "v3",
+  "output_root": "task-2-mro-prediction/data",
+  "random_seed": 42,
+  "warmup_days": 365,
+  "alpha_by_period": {
+    "2022": -29.5,
+    "2023": -25.0,
+    "val": -22.0,
+    "test": -22.75
+  },
+  "snapshot_interval_cycles": 26.336859798002205,
+  "max_snapshot_gap_allowed_cycles": 30,
+  "n_rows": 299474,
+  "n_positive": 5997,
+  "positive_rate": 0.020025110694083626,
+  "positive_rate_by_period": {
+    "2022": 0.019939299181458658,
+    "2023": 0.019798933114485023,
+    "val": 0.021694507361268402,
+    "test": 0.019779225479551212
+  },
+  "positive_rate_by_year": {
+    "2022": 0.019939299181458658,
+    "2023": 0.019798933114485023,
+    "2024": 0.02042722352603094
+  },
+  "n_aircraft": 200,
+  "n_components": 7367,
+  "n_simulated_instances": 10820,
+  "n_removal_events": 8823,
+  "n_snapshot_event_links": 11368,
+  "date_range": [
+    "2022-01-01",
+    "2024-09-30"
+  ],
+  "n_formal_removal_events": 5371,
+  "n_formal_events_with_scoring_opportunity": 5371,
+  "formal_event_coverage": 1.0,
+  "n_formal_events_with_same_split_opportunity": 5371,
+  "formal_event_same_split_coverage": 1.0,
+  "event_coverage_by_temporal_split": {
+    "train": {
+      "n_events": 3851,
+      "n_covered_same_split": 3851,
+      "coverage_same_split": 1.0
+    },
+    "val": {
+      "n_events": 548,
+      "n_covered_same_split": 548,
+      "coverage_same_split": 1.0
+    },
+    "test": {
+      "n_events": 972,
+      "n_covered_same_split": 972,
+      "coverage_same_split": 1.0
+    }
+  },
+  "max_snapshot_gap_cycles": 29.99975976003725,
+  "n_snapshot_gap_violations": 0,
+  "sensor_missing_rate_applicable": {
+    "sensor_vibration": 0.08762363343729339,
+    "sensor_temp": 0.07693155332349386,
+    "sensor_pressure": 0.09762814718491149,
+    "sensor_oil_debris": 0.12645917609180218,
+    "sensor_rpm_deviation": 0.10780933062880324,
+    "sensor_exhaust_temp": 0.11662949194547707
+  },
+  "sensor_missing_rate_overall": {
+    "sensor_vibration": 0.08762363343729339,
+    "sensor_temp": 0.07693155332349386,
+    "sensor_pressure": 0.42997388754950344,
+    "sensor_oil_debris": 0.6466738347903324,
+    "sensor_rpm_deviation": 0.5593774417812565,
+    "sensor_exhaust_temp": 0.8214669720910663
+  }
+}

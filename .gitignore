@@ -1,0 +1,42 @@
+# Environment and local state
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.db
+*.db-shm
+*.db-wal
+.agent_harness_chat.json
+.agent_harness_chat_history
+*.egg-info/
+build/
+dist/
+
+# OS, editors, and local tooling
+.DS_Store
+.idea/
+.vscode/
+**/.trae/
+**/.screenshots/
+node_modules/
+
+# Local source material and archived Chinese documentation
+requirements/
+**/docs/archive/
+
+# Local archives; do not ship packaged copies of the source tree
+*.zip
+
+# Large generated artifacts; regenerate with the scripts in each project
+task-2-mro-prediction/data/raw/
+task-2-mro-prediction/data/splits/
+task-2-mro-prediction/models/experiments/
+task-2-mro-prediction/reports/predictions*.csv

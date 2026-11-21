@@ -1,0 +1,21 @@
+.env
+.venv/
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.db
+*.db-shm
+*.db-wal
+.agent_harness_chat.json
+.agent_harness_chat_history
+*.egg-info/
+build/
+dist/
+
+# Chinese documentation is archived locally and not committed.
+docs/archive/

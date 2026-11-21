@@ -1,0 +1,363 @@
+{
+  "info": {
+    "_postman_id": "ef2ab06f-fa4c-4b18-9b7b-c8071a3c94a5",
+    "name": "Operations Assistant Agent Harness",
+    "description": "Local API checks for health, direct runs, ordered traces, incident approval, and incident rejection. Run each folder in order. Create requests persist run_id and approval_id automatically.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Core API",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/health"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Health is ready', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    pm.expect(pm.response.json().status).to.eql('ok');",
+                  "    pm.expect(pm.response.json().database).to.eql('ok');",
+                  "    pm.expect(pm.response.json().llm_configured).to.eql(true);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Create Direct Answer Run",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"objective\": \"Reply with a short acknowledgment. Do not use any tools.\"\n}"
+            },
+            "url": "{{base_url}}/api/v1/runs"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Direct answer run completes', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const run = pm.response.json();",
+                  "    pm.expect(run.status).to.eql('COMPLETED');",
+                  "    pm.expect(run.error).to.eql(null);",
+                  "    pm.expect(run.final_answer).to.be.a('string').and.not.empty;",
+                  "    pm.collectionVariables.set('run_id', run.id);",
+                  "    pm.environment.set('run_id', run.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Get Run",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/runs/{{run_id}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Run query returns the selected run', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const run = pm.response.json();",
+                  "    pm.expect(run.id).to.eql(pm.variables.get('run_id'));",
+                  "    pm.expect(run.status).to.eql('COMPLETED');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Get Ordered Trace",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/runs/{{run_id}}/events"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Trace is complete and ordered', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const trace = pm.response.json();",
+                  "    pm.expect(trace.run_id).to.eql(pm.variables.get('run_id'));",
+                  "    pm.expect(trace.count).to.be.above(0);",
+                  "    pm.expect(trace.events.map(function (event) { return event.sequence; })).to.eql(Array.from({length: trace.count}, function (_, index) { return index + 1; }));",
+                  "    pm.expect(trace.events[trace.count - 1].event_type).to.eql('run_finished');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Approve Incident",
+      "item": [
+        {
+          "name": "Create Run Waiting for Approval",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"objective\": \"Call create_incident now with title 'Checkout degraded', description 'Elevated checkout timeout and upstream payment errors observed in the mock service snapshot.', and severity P2. Do not ask for confirmation in natural language because the server pauses the tool for approval. After approval and a successful tool result, give a short final answer containing the incident ID and do not call any more tools.\"\n}"
+            },
+            "url": "{{base_url}}/api/v1/runs"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Incident action pauses with original arguments', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const run = pm.response.json();",
+                  "    pm.expect(run.status).to.eql('WAITING_APPROVAL');",
+                  "    pm.expect(run.pending_approval).to.be.an('object');",
+                  "    pm.expect(run.pending_approval.tool_name).to.eql('create_incident');",
+                  "    pm.expect(run.pending_approval.arguments.severity).to.eql('P2');",
+                  "    pm.expect(run.final_answer).to.eql(null);",
+                  "    pm.collectionVariables.set('run_id', run.id);",
+                  "    pm.collectionVariables.set('approval_id', run.pending_approval.id);",
+                  "    pm.environment.set('run_id', run.id);",
+                  "    pm.environment.set('approval_id', run.pending_approval.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Approve Incident",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"approve\"\n}"
+            },
+            "url": "{{base_url}}/api/v1/runs/{{run_id}}/approvals/{{approval_id}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Approval resumes the original run', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const run = pm.response.json();",
+                  "    pm.expect(run.id).to.eql(pm.variables.get('run_id'));",
+                  "    pm.expect(run.status).to.eql('COMPLETED');",
+                  "    pm.expect(run.pending_approval).to.eql(null);",
+                  "    pm.expect(run.error).to.eql(null);",
+                  "    pm.expect(run.final_answer).to.be.a('string').and.not.empty;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Get Approved Incident Trace",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/runs/{{run_id}}/events"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Approved incident executed exactly once', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const trace = pm.response.json();",
+                  "    const results = trace.events.filter(function (event) {",
+                  "        return event.event_type === 'tool_result' && event.payload.tool_name === 'create_incident';",
+                  "    });",
+                  "    pm.expect(results).to.have.lengthOf(1);",
+                  "    pm.expect(results[0].payload.observation.ok).to.eql(true);",
+                  "    pm.expect(results[0].payload.observation.data.incident_id).to.match(/^inc_/);",
+                  "    pm.expect(trace.events.map(function (event) { return event.sequence; })).to.eql(Array.from({length: trace.count}, function (_, index) { return index + 1; }));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reject Incident",
+      "item": [
+        {
+          "name": "Create Run Waiting for Rejection",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"objective\": \"Call create_incident now with title 'Checkout degraded', description 'Elevated checkout timeout and upstream payment errors observed in the mock service snapshot.', and severity P2. Do not ask for confirmation in natural language because the server pauses the tool for approval.\"\n}"
+            },
+            "url": "{{base_url}}/api/v1/runs"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Second incident action waits for a decision', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const run = pm.response.json();",
+                  "    pm.expect(run.status).to.eql('WAITING_APPROVAL');",
+                  "    pm.expect(run.pending_approval.tool_name).to.eql('create_incident');",
+                  "    pm.collectionVariables.set('run_id', run.id);",
+                  "    pm.collectionVariables.set('approval_id', run.pending_approval.id);",
+                  "    pm.environment.set('run_id', run.id);",
+                  "    pm.environment.set('approval_id', run.pending_approval.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Reject Incident",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"reject\"\n}"
+            },
+            "url": "{{base_url}}/api/v1/runs/{{run_id}}/approvals/{{approval_id}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Rejection completes safely', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const run = pm.response.json();",
+                  "    pm.expect(run.status).to.eql('COMPLETED');",
+                  "    pm.expect(run.pending_approval).to.eql(null);",
+                  "    pm.expect(run.error).to.eql(null);",
+                  "    pm.expect(run.final_answer).to.be.a('string').and.not.empty;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Get Rejected Incident Trace",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/runs/{{run_id}}/events"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Rejected incident has no tool execution', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const trace = pm.response.json();",
+                  "    pm.expect(trace.events.some(function (event) { return event.event_type === 'tool_result'; })).to.eql(false);",
+                  "    const terminalState = trace.events.filter(function (event) { return event.event_type === 'run_state_changed'; }).pop();",
+                  "    pm.expect(terminalState.payload.to_status).to.eql('COMPLETED');",
+                  "    pm.expect(terminalState.payload.reason).to.eql('approval_rejected');",
+                  "    pm.expect(trace.events[trace.count - 1].event_type).to.eql('run_finished');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "run_id",
+      "value": "run-id-created-by-request-tests"
+    },
+    {
+      "key": "approval_id",
+      "value": "approval-id-created-by-request-tests"
+    }
+  ]
+}

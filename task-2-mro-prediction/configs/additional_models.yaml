@@ -1,0 +1,44 @@
+experiment:
+  name: knn_random_forest_val_only
+  dataset_version: v3
+  random_seed: 42
+  temporal_test_used: false
+  output_dir: models/experiments
+  metrics_path: reports/additional_models_val_metrics.json
+  threshold_search_path: reports/additional_models_val_threshold_search.csv
+
+data:
+  train: data/splits/temporal/train.csv
+  val: data/splits/temporal/val.csv
+  removal_events: data/audit/removal_events.csv
+  snapshot_event_links: data/audit/snapshot_event_links.csv
+
+preprocessing:
+  numeric_imputation: train_median
+  numeric_scaling: standard_without_mean_centering
+  categorical_encoding: one_hot_ignore_unknown
+  dense_output: true
+
+knn:
+  n_neighbors: 51
+  weights: distance
+  algorithm: brute
+  metric: minkowski
+  p: 2
+  n_jobs: 4
+  sampling: all_positive_and_equal_random_negative_from_train
+
+random_forest:
+  n_estimators: 300
+  max_depth: 16
+  min_samples_leaf: 5
+  max_features: sqrt
+  class_weight: balanced_subsample
+  random_state: 42
+  n_jobs: 4
+
+threshold_search:
+  max_alerts_per_100: 4.5
+  n_quantiles: 100
+  refinement_points: 40
+  cooldown_cycles: 30

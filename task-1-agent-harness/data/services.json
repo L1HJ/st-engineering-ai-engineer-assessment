@@ -1,0 +1,32 @@
+[
+  {
+    "service_name": "api-gateway",
+    "status": "healthy",
+    "description": "Request latency and error rate are within normal thresholds.",
+    "updated_at": "2026-11-21T08:00:00Z"
+  },
+  {
+    "service_name": "checkout",
+    "status": "degraded",
+    "description": "Elevated timeout and upstream payment error rates are affecting checkout requests.",
+    "updated_at": "2026-11-21T08:01:00Z"
+  },
+  {
+    "service_name": "payments",
+    "status": "outage",
+    "description": "Payment authorization requests are failing across the current provider snapshot.",
+    "updated_at": "2026-11-21T08:02:00Z"
+  },
+  {
+    "service_name": "inventory",
+    "status": "maintenance",
+    "description": "Inventory reads are available within an announced maintenance window; writes are paused.",
+    "updated_at": "2026-11-21T08:03:00Z"
+  },
+  {
+    "service_name": "notifications",
+    "status": "healthy",
+    "description": "Notification queues and delivery latency are within normal thresholds.",
+    "updated_at": "2026-11-21T08:04:00Z"
+  }
+]

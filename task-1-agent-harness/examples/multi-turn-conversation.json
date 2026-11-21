@@ -1,0 +1,422 @@
+{
+  "example_schema_version": 1,
+  "scenario": "multi-turn-conversation-with-tool-and-approval",
+  "description": "Three consecutive turns: an ambiguous request that is clarified, a tool-backed investigation, and an approval-gated incident. Each turn maps to one run and its ordered trace.",
+  "source": "Offline deterministic (Fake Kimi, Fake Clock); no real provider call",
+  "conversation": {
+    "id": "20c4307d-2769-49ed-ac99-e898c63fad62",
+    "title": "Checkout degradation triage",
+    "status": "ACTIVE",
+    "turn_count": 3,
+    "turns": [
+      {
+        "turn_index": 1,
+        "run_id": "f9d79002-35b8-43c7-a01e-104d096a8c14",
+        "status": "COMPLETED",
+        "user_content": "that service is down again",
+        "assistant_content": "Which service do you mean, and when did the problem start?",
+        "error": null,
+        "created_at": "2026-11-21T08:00:00Z",
+        "completed_at": "2026-11-21T08:00:00Z"
+      },
+      {
+        "turn_index": 2,
+        "run_id": "ae50a47e-080c-4f43-b72f-4e966cd271fd",
+        "status": "COMPLETED",
+        "user_content": "checkout - it started around 09:10.",
+        "assistant_content": "Checkout is degraded: elevated timeout and upstream payment error rates are affecting requests. The current snapshot was updated at 08:01 UTC.",
+        "error": null,
+        "created_at": "2026-11-21T08:00:00Z",
+        "completed_at": "2026-11-21T08:00:00Z"
+      },
+      {
+        "turn_index": 3,
+        "run_id": "a461a40d-2082-4974-ad5e-23892663fc3c",
+        "status": "COMPLETED",
+        "user_content": "Open a P2 incident and summarize what we know.",
+        "assistant_content": "Incident created as P2 with the approved arguments. Checkout degradation is now tracked for follow-up.",
+        "error": null,
+        "created_at": "2026-11-21T08:00:00Z",
+        "completed_at": "2026-11-21T08:00:00Z"
+      }
+    ],
+    "created_at": "2026-11-21T08:00:00Z",
+    "updated_at": "2026-11-21T08:00:00Z"
+  },
+  "turns": [
+    {
+      "turn_index": 1,
+      "run_id": "f9d79002-35b8-43c7-a01e-104d096a8c14",
+      "run": {
+        "id": "f9d79002-35b8-43c7-a01e-104d096a8c14",
+        "objective": "that service is down again",
+        "status": "COMPLETED",
+        "step_count": 1,
+        "active_elapsed_ms": 0,
+        "final_answer": "Which service do you mean, and when did the problem start?",
+        "error": null,
+        "pending_approval": null,
+        "created_at": "2026-11-21T08:00:00Z",
+        "updated_at": "2026-11-21T08:00:00Z",
+        "completed_at": "2026-11-21T08:00:00Z"
+      },
+      "trace": {
+        "run_id": "f9d79002-35b8-43c7-a01e-104d096a8c14",
+        "count": 4,
+        "events": [
+          {
+            "sequence": 1,
+            "event_type": "conversation_turn_started",
+            "payload": {
+              "conversation_id": "20c4307d-2769-49ed-ac99-e898c63fad62",
+              "turn_index": 1,
+              "objective": "that service is down again",
+              "limits": {
+                "agent_max_steps": 20,
+                "agent_active_time_limit_seconds": 120.0,
+                "llm_timeout_seconds": 30.0
+              }
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 2,
+            "event_type": "llm_response",
+            "payload": {
+              "step": 1,
+              "content": "Which service do you mean, and when did the problem start?",
+              "attempt": 1
+            },
+            "latency_ms": 0,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 3,
+            "event_type": "run_state_changed",
+            "payload": {
+              "from_status": "RUNNING",
+              "to_status": "COMPLETED",
+              "reason": "COMPLETED"
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 4,
+            "event_type": "run_finished",
+            "payload": {
+              "status": "COMPLETED",
+              "step_count": 1,
+              "active_elapsed_ms": 0,
+              "error_code": null
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "turn_index": 2,
+      "run_id": "ae50a47e-080c-4f43-b72f-4e966cd271fd",
+      "run": {
+        "id": "ae50a47e-080c-4f43-b72f-4e966cd271fd",
+        "objective": "checkout - it started around 09:10.",
+        "status": "COMPLETED",
+        "step_count": 2,
+        "active_elapsed_ms": 0,
+        "final_answer": "Checkout is degraded: elevated timeout and upstream payment error rates are affecting requests. The current snapshot was updated at 08:01 UTC.",
+        "error": null,
+        "pending_approval": null,
+        "created_at": "2026-11-21T08:00:00Z",
+        "updated_at": "2026-11-21T08:00:00Z",
+        "completed_at": "2026-11-21T08:00:00Z"
+      },
+      "trace": {
+        "run_id": "ae50a47e-080c-4f43-b72f-4e966cd271fd",
+        "count": 7,
+        "events": [
+          {
+            "sequence": 1,
+            "event_type": "conversation_turn_started",
+            "payload": {
+              "conversation_id": "20c4307d-2769-49ed-ac99-e898c63fad62",
+              "turn_index": 2,
+              "objective": "checkout - it started around 09:10.",
+              "limits": {
+                "agent_max_steps": 20,
+                "agent_active_time_limit_seconds": 120.0,
+                "llm_timeout_seconds": 30.0
+              }
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 2,
+            "event_type": "llm_response",
+            "payload": {
+              "step": 1,
+              "content": null,
+              "tool_call": {
+                "id": "call-status",
+                "name": "get_service_status",
+                "arguments": {
+                  "service_name": "checkout"
+                }
+              },
+              "attempt": 1
+            },
+            "latency_ms": 0,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 3,
+            "event_type": "tool_call",
+            "payload": {
+              "tool_call_id": "call-status",
+              "tool_name": "get_service_status",
+              "arguments": {
+                "service_name": "checkout"
+              }
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 4,
+            "event_type": "tool_result",
+            "payload": {
+              "tool_call_id": "call-status",
+              "tool_name": "get_service_status",
+              "attempt": 1,
+              "observation": {
+                "tool_call_id": "call-status",
+                "ok": true,
+                "data": {
+                  "service_name": "checkout",
+                  "found": true,
+                  "status": "degraded",
+                  "description": "Elevated timeout and upstream payment error rates are affecting checkout requests.",
+                  "updated_at": "2026-11-21T08:01:00Z"
+                }
+              }
+            },
+            "latency_ms": 0,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 5,
+            "event_type": "llm_response",
+            "payload": {
+              "step": 2,
+              "content": "Checkout is degraded: elevated timeout and upstream payment error rates are affecting requests. The current snapshot was updated at 08:01 UTC.",
+              "attempt": 1
+            },
+            "latency_ms": 0,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 6,
+            "event_type": "run_state_changed",
+            "payload": {
+              "from_status": "RUNNING",
+              "to_status": "COMPLETED",
+              "reason": "COMPLETED"
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 7,
+            "event_type": "run_finished",
+            "payload": {
+              "status": "COMPLETED",
+              "step_count": 2,
+              "active_elapsed_ms": 0,
+              "error_code": null
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "turn_index": 3,
+      "run_id": "a461a40d-2082-4974-ad5e-23892663fc3c",
+      "run": {
+        "id": "a461a40d-2082-4974-ad5e-23892663fc3c",
+        "objective": "Open a P2 incident and summarize what we know.",
+        "status": "COMPLETED",
+        "step_count": 2,
+        "active_elapsed_ms": 0,
+        "final_answer": "Incident created as P2 with the approved arguments. Checkout degradation is now tracked for follow-up.",
+        "error": null,
+        "pending_approval": null,
+        "created_at": "2026-11-21T08:00:00Z",
+        "updated_at": "2026-11-21T08:00:00Z",
+        "completed_at": "2026-11-21T08:00:00Z"
+      },
+      "trace": {
+        "run_id": "a461a40d-2082-4974-ad5e-23892663fc3c",
+        "count": 11,
+        "events": [
+          {
+            "sequence": 1,
+            "event_type": "conversation_turn_started",
+            "payload": {
+              "conversation_id": "20c4307d-2769-49ed-ac99-e898c63fad62",
+              "turn_index": 3,
+              "objective": "Open a P2 incident and summarize what we know.",
+              "limits": {
+                "agent_max_steps": 20,
+                "agent_active_time_limit_seconds": 120.0,
+                "llm_timeout_seconds": 30.0
+              }
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 2,
+            "event_type": "llm_response",
+            "payload": {
+              "step": 1,
+              "content": null,
+              "tool_call": {
+                "id": "call-incident",
+                "name": "create_incident",
+                "arguments": {
+                  "title": "Checkout degradation",
+                  "description": "Checkout error rate is elevated; upstream payment errors are suspected.",
+                  "severity": "P2"
+                }
+              },
+              "attempt": 1
+            },
+            "latency_ms": 0,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 3,
+            "event_type": "tool_call",
+            "payload": {
+              "tool_call_id": "call-incident",
+              "tool_name": "create_incident",
+              "arguments": {
+                "title": "Checkout degradation",
+                "description": "Checkout error rate is elevated; upstream payment errors are suspected.",
+                "severity": "P2"
+              }
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 4,
+            "event_type": "approval_requested",
+            "payload": {
+              "approval_id": "61e036cc-0fee-4a0d-b19a-3d2718b9f3e2",
+              "tool_call_id": "call-incident",
+              "tool_name": "create_incident",
+              "arguments_hash": "a2b59a6ad33dbe48960554d17527abd3dcc26556dae9b928f516190d06f7046e"
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 5,
+            "event_type": "run_state_changed",
+            "payload": {
+              "from_status": "RUNNING",
+              "to_status": "WAITING_APPROVAL",
+              "reason": "approval_requested"
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 6,
+            "event_type": "approval_decided",
+            "payload": {
+              "approval_id": "61e036cc-0fee-4a0d-b19a-3d2718b9f3e2",
+              "tool_call_id": "call-incident",
+              "decision": "approve",
+              "decided_at": "2026-11-21T08:00:00Z"
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 7,
+            "event_type": "run_state_changed",
+            "payload": {
+              "from_status": "WAITING_APPROVAL",
+              "to_status": "RUNNING",
+              "reason": "approval_approved"
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 8,
+            "event_type": "tool_result",
+            "payload": {
+              "tool_call_id": "call-incident",
+              "tool_name": "create_incident",
+              "attempt": 1,
+              "observation": {
+                "tool_call_id": "call-incident",
+                "ok": true,
+                "data": {
+                  "incident_id": "inc_9cbf5277164c41969d5a84f8b04f674e",
+                  "status": "OPEN",
+                  "severity": "P2",
+                  "created_at": "2026-11-21T08:00:00Z"
+                }
+              }
+            },
+            "latency_ms": 0,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 9,
+            "event_type": "llm_response",
+            "payload": {
+              "step": 2,
+              "content": "Incident created as P2 with the approved arguments. Checkout degradation is now tracked for follow-up.",
+              "attempt": 1
+            },
+            "latency_ms": 0,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 10,
+            "event_type": "run_state_changed",
+            "payload": {
+              "from_status": "RUNNING",
+              "to_status": "COMPLETED",
+              "reason": "COMPLETED"
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          },
+          {
+            "sequence": 11,
+            "event_type": "run_finished",
+            "payload": {
+              "status": "COMPLETED",
+              "step_count": 2,
+              "active_elapsed_ms": 0,
+              "error_code": null
+            },
+            "latency_ms": null,
+            "created_at": "2026-11-21T08:00:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

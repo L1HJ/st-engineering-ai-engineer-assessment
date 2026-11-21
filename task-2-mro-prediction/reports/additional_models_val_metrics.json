@@ -1,0 +1,85 @@
+{
+  "experiment": {
+    "name": "knn_random_forest_val_only",
+    "dataset_version": "v3",
+    "random_seed": 42,
+    "temporal_test_used": false,
+    "output_dir": "models/experiments",
+    "metrics_path": "reports/additional_models_val_metrics.json",
+    "threshold_search_path": "reports/additional_models_val_threshold_search.csv"
+  },
+  "config_hash": "c6c3c1823950329d8ec48f22e9c6de0442050e21c4537436dffbd48e40186da5",
+  "scope": {
+    "train_rows": 215958,
+    "val_rows": 28256,
+    "temporal_test_read": false,
+    "temporal_test_evaluated": false,
+    "original_frozen_models_modified": false,
+    "selection_rule": "Max event recall under val alerts<=4.5; ties broken by fewer alerts, then higher threshold"
+  },
+  "models": {
+    "knn": {
+      "split": "val",
+      "threshold": 0.7688021824057035,
+      "n_snapshots": 28256,
+      "n_positive_snapshots": 613,
+      "roc_auc": 0.9602653477609742,
+      "pr_auc": 0.27070578450759886,
+      "snapshot_recall": 0.8058727569331158,
+      "snapshot_precision": 0.2102127659574468,
+      "snapshot_f1": 0.3334458319271009,
+      "snapshot_alert_rate": 0.08316817667044167,
+      "alert_episode_count": 992,
+      "active_component_window_count": 22094,
+      "alerts_per_100_active": 4.489906762016838,
+      "detected_event_count": 517,
+      "actual_event_count": 548,
+      "event_recall": 0.9434306569343066,
+      "first_warning_cycles": {
+        "count": 517,
+        "min": 0.0,
+        "p25": 6.618210978387651,
+        "median": 13.853899936370908,
+        "p75": 22.52567207082484,
+        "max": 29.9689288461027
+      },
+      "train_rows_used": 8582,
+      "train_positive_rows_used": 4291,
+      "train_sampling": "all_positive_and_equal_negative",
+      "model_file": "task-2-mro-prediction/models/experiments/knn.joblib",
+      "temporal_test_metrics": null
+    },
+    "random_forest": {
+      "split": "val",
+      "threshold": 0.12987566548969479,
+      "n_snapshots": 28256,
+      "n_positive_snapshots": 613,
+      "roc_auc": 0.9749899661608369,
+      "pr_auc": 0.3352396435183109,
+      "snapshot_recall": 0.9445350734094616,
+      "snapshot_precision": 0.232064128256513,
+      "snapshot_f1": 0.3725868725868726,
+      "snapshot_alert_rate": 0.08829983012457532,
+      "alert_episode_count": 952,
+      "active_component_window_count": 22094,
+      "alerts_per_100_active": 4.308862134516159,
+      "detected_event_count": 548,
+      "actual_event_count": 548,
+      "event_recall": 1.0,
+      "first_warning_cycles": {
+        "count": 548,
+        "min": 0.0,
+        "p25": 8.775196416345352,
+        "median": 15.416002052115573,
+        "p75": 22.759206069921447,
+        "max": 29.9689288461027
+      },
+      "train_rows_used": 215958,
+      "train_positive_rows_used": 4291,
+      "train_sampling": "full_train",
+      "model_file": "task-2-mro-prediction/models/experiments/random_forest.joblib",
+      "temporal_test_metrics": null
+    }
+  },
+  "conclusion_scope": "KNN/RF are val-only exploratory results and do not change the frozen formal delivery conclusions"
+}

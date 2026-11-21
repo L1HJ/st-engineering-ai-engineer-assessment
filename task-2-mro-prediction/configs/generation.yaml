@@ -1,0 +1,201 @@
+# Mock dataset generation parameters (POC initial values, not industry standards)
+# Every stochastic process is controlled by random_seed for reproducibility
+
+random_seed: 42
+
+# ---- Scale ----
+n_aircraft: 200              # Number of aircraft
+target_components: 2000      # Initial physical component instances
+target_snapshots: 260000     # v3 densification target (about 250k-300k rows after right-censoring/retirement filtering)
+positive_rate_target: 0.02   # Final snapshot-level positive rate target
+
+# ---- Time ----
+date_start: "2022-01-01"       # Snapshot start date
+warmup_days: 365             # Simulate one year first so removals/replacements reach steady state; warm-up snapshots are not written
+date_end: "2024-12-31"
+prediction_window_cycles: 30   # Label observation window (future flight cycles)
+
+# ---- Snapshot sampling ----
+snapshot:
+  interval_cycles_min: 20
+  interval_cycles_max: 40
+  max_gap_cycles: 30           # Hard upper bound on adjacent actual snapshot cycle gap; add points when needed
+  # Target row count sets the base interval; anchors are placed at install, split boundaries, and before removals
+
+# ---- Aircraft models (non-uniform distribution) ----
+# utilization: daily flight-cycle baseline; sensor baselines depend on aircraft model and component type
+aircraft_models:
+  - name: B737-800
+    weight: 0.28
+    utilization: 4.2
+    avg_flight_hours: 1.6
+  - name: A320neo
+    weight: 0.26
+    utilization: 4.0
+    avg_flight_hours: 1.7
+  - name: B777-300ER
+    weight: 0.16
+    utilization: 3.0
+    avg_flight_hours: 6.5
+  - name: A350-900
+    weight: 0.12
+    utilization: 3.2
+    avg_flight_hours: 6.0
+  - name: B787-9
+    weight: 0.10
+    utilization: 3.1
+    avg_flight_hours: 5.8
+  - name: A330-300
+    weight: 0.08
+    utilization: 2.6
+    avg_flight_hours: 5.0
+
+# ---- Operators (non-uniform distribution; affects operating intensity) ----
+operators:
+  - name: Op_A
+    weight: 0.30
+    util_multiplier: 1.10
+  - name: Op_B
+    weight: 0.25
+    util_multiplier: 1.00
+  - name: Op_C
+    weight: 0.20
+    util_multiplier: 0.95
+  - name: Op_D
+    weight: 0.15
+    util_multiplier: 0.90
+  - name: Op_E
+    weight: 0.10
+    util_multiplier: 1.05
+
+# ---- Component types (non-uniform distribution) ----
+# degradation_rate: baseline degradation increment per cycle
+# avg_flight_hours: average sector hours for the environment where this component operates (used to generate operating features)
+component_types:
+  - name: hydraulic_pump
+    weight: 0.18
+    degradation_rate: 0.012
+  - name: fuel_pump
+    weight: 0.16
+    degradation_rate: 0.014
+  - name: engine
+    weight: 0.10
+    degradation_rate: 0.008
+  - name: apu
+    weight: 0.12
+    degradation_rate: 0.011
+  - name: generator
+    weight: 0.14
+    degradation_rate: 0.013
+  - name: actuator
+    weight: 0.12
+    degradation_rate: 0.015
+  - name: valve
+    weight: 0.10
+    degradation_rate: 0.016
+  - name: environmental_control
+    weight: 0.08
+    degradation_rate: 0.010
+
+# ---- Sensor applicability and baselines ----
+# applicable: whether the sensor applies to this component type (false means structurally missing)
+# baseline_mean / baseline_std: healthy-state reading distribution
+sensors:
+  sensor_vibration:
+    applicable: [hydraulic_pump, fuel_pump, engine, apu, generator, actuator, valve, environmental_control]
+    baseline_mean: 2.0
+    baseline_std: 0.5
+    missing_rate: 0.08
+  sensor_temp:
+    applicable: [hydraulic_pump, fuel_pump, engine, apu, generator, actuator, valve, environmental_control]
+    baseline_mean: 85.0
+    baseline_std: 6.0
+    missing_rate: 0.07
+  sensor_pressure:
+    applicable: [hydraulic_pump, fuel_pump, engine, valve, environmental_control]
+    baseline_mean: 30.0
+    baseline_std: 2.5
+    missing_rate: 0.09
+  sensor_oil_debris:
+    applicable: [engine, hydraulic_pump, generator]
+    baseline_mean: 3.0
+    baseline_std: 1.0
+    missing_rate: 0.12
+  sensor_rpm_deviation:
+    applicable: [engine, apu, generator, fuel_pump]
+    baseline_mean: 0.0
+    baseline_std: 1.5
+    missing_rate: 0.10
+  sensor_exhaust_temp:
+    applicable: [engine, apu]
+    baseline_mean: 420.0
+    baseline_std: 20.0
+    missing_rate: 0.11
+
+# ---- Missingness mechanism mix (MCAR/MAR/MNAR) ----
+missing_mechanism:
+  mcar_frac: 0.50
+  mar_frac: 0.30
+  mnar_frac: 0.20
+  # MAR: missing probability depends on aircraft model/operator data quality
+  # MNAR: missing probability is positively correlated with latent degradation (sensors near failure drop out more often)
+
+# ---- Anomalies ----
+anomaly:
+  cell_frac: 0.01        # Share of anomalous sensor observation cells
+  types:
+    degradation_anomaly_frac: 0.45   # True degradation anomalies (predictive signal)
+    measurement_anomaly_frac: 0.35   # Measurement anomalies (transient spikes)
+    data_error_frac: 0.20            # Data errors (out of range / invalid negative values)
+
+# ---- Fault codes (long-tail distribution, about 40 codes) ----
+# The first few are common codes; the rest form a long tail sampled with exponentially decaying weights at generation time
+fault:
+  n_codes: 40
+  common_code_head: 5          # First 5 are high-frequency codes
+  severity_weights: [0.55, 0.30, 0.15]   # low / medium / high
+  # Fault triggering probability rises with degradation
+  base_fault_rate_per_cycle: 0.015
+
+# ---- Maintenance ----
+maintenance:
+  scheduled_interval_cycles: 200   # Scheduled maintenance baseline interval
+  scheduled_recovery: 0.15         # Share of degradation recovered by scheduled maintenance
+  overhaul_recovery: 0.55          # Share of degradation recovered by overhaul
+  # After an unscheduled removal: the component instance retires (not reset)
+
+# ---- Degradation and event model ----
+degradation:
+  # Individual differences: degradation-rate multiplier per component ~ Gamma
+  individual_shape: 3.0
+  individual_scale: 0.33
+  # Usage-intensity coefficient on degradation
+  usage_coef: 0.6
+  # Random perturbation standard deviation (per cycle)
+  noise_std: 0.02
+  # Failure threshold: degradation above failure_threshold enters the high-risk region
+  failure_threshold: 1.0
+
+# Unscheduled removal hazard: logit(h) = alpha_type + f(D) + beta1*usage + beta2*fault_state + u_comp
+hazard:
+  alpha_global: -34.0           # Initial value for period-wise calibration (final intercept is written to generation_summary)
+  degradation_clip: 6.0         # Cap extreme degradation without creating a large shared risk plateau
+  f_degradation_power: 2.0      # f(D) = D^power; risk rises steeply near failure
+  usage_coef: 0.5
+  fault_coef: 0.8
+  component_re_std: 0.3         # Component-instance random-effect standard deviation
+
+# ---- Splits ----
+split:
+  temporal:
+    train_end: "2023-12-31"
+    val_start: "2024-01-01"
+    val_end: "2024-03-31"
+    test_start: "2024-04-01"
+    test_end: "2024-09-30"
+    # Label observation for test snapshots may extend into 2024-Q4 to confirm labels
+    purge_obs_extra_days: 120
+  group_aircraft:
+    test_frac: 0.20
+  group_component:
+    test_frac: 0.20

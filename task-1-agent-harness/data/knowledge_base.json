@@ -1,0 +1,37 @@
+[
+  {
+    "id": "kb-001",
+    "title": "Checkout error troubleshooting",
+    "content": "Check the checkout service status and recent error rate. If checkout is degraded, inspect timeout and upstream payment errors before escalating. Record evidence before creating an incident."
+  },
+  {
+    "id": "kb-002",
+    "title": "Alert triage and escalation",
+    "content": "Confirm alert scope, duration, and customer impact. Suppress duplicate notifications, assign an owner, and escalate only when the alert remains actionable after initial checks."
+  },
+  {
+    "id": "kb-003",
+    "title": "Incident severity classification",
+    "content": "Use P1 for broad active customer impact, P2 for significant degradation, P3 for limited impact, and P4 for minor issues. Document the evidence used to select a severity."
+  },
+  {
+    "id": "kb-004",
+    "title": "Database connection saturation",
+    "content": "Check connection pool utilization, slow queries, and waiting requests. Reduce nonessential load and avoid restarting a healthy database without confirming the source of saturation."
+  },
+  {
+    "id": "kb-005",
+    "title": "Payment timeout runbook",
+    "content": "Inspect payment gateway latency and checkout timeout errors. Verify whether retries are safe, avoid duplicate charges, and escalate persistent gateway failures with representative timestamps."
+  },
+  {
+    "id": "kb-006",
+    "title": "Deployment rollback procedure",
+    "content": "Confirm the affected release and compare current errors with the previous deployment window. Roll back through the approved deployment process and verify service health afterward."
+  },
+  {
+    "id": "kb-007",
+    "title": "Service maintenance verification",
+    "content": "Review the maintenance window and expected customer impact. Do not treat an announced maintenance state as an outage, but investigate errors that continue after the window ends."
+  }
+]

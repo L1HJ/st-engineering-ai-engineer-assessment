@@ -1,0 +1,256 @@
+{
+  "dataset_version": "v3",
+  "evaluation_batch": "entity_robustness",
+  "temporal_test_status": "completed",
+  "config_hash": "dcb063ae1b926e8967f9e3e0670c2bbac3028b18a506ff23b6054c571a32f66d",
+  "internal_train_end": "2023-12-31",
+  "internal_val_start": "2024-01-01",
+  "internal_val_end": "2024-03-31",
+  "val_max_alerts_per_100": 4.5,
+  "entity_splits": {
+    "by_aircraft": {
+      "entity_column": "aircraft_id",
+      "train_entity_count": 160,
+      "test_entity_count": 40,
+      "internal_train_rows": 171719,
+      "internal_val_rows": 22534,
+      "entity_test_rows": 61250,
+      "models": {
+        "logistic_regression": {
+          "candidate": "lr_c_1",
+          "threshold": 0.7864091457251977,
+          "internal_val": {
+            "split": "internal_val",
+            "threshold": 0.7864091457251977,
+            "n_snapshots": 22534,
+            "n_positive_snapshots": 476,
+            "roc_auc": 0.9578249968951222,
+            "pr_auc": 0.238625910532646,
+            "snapshot_recall": 0.75,
+            "snapshot_precision": 0.22037037037037038,
+            "snapshot_f1": 0.3406488549618321,
+            "snapshot_alert_rate": 0.07189136416082365,
+            "alert_episode_count": 792,
+            "active_component_window_count": 17602,
+            "alerts_per_100_active": 4.499488694466538,
+            "detected_event_count": 405,
+            "actual_event_count": 428,
+            "event_recall": 0.9462616822429907,
+            "first_warning_cycles": {
+              "count": 405,
+              "min": 0.0,
+              "p25": 4.810062044134611,
+              "median": 12.403074980341444,
+              "p75": 21.965274635808782,
+              "max": 29.9689288461027
+            }
+          },
+          "entity_test": {
+            "split": "entity_test",
+            "threshold": 0.7864091457251977,
+            "n_snapshots": 61250,
+            "n_positive_snapshots": 1283,
+            "roc_auc": 0.9550196229646232,
+            "pr_auc": 0.23033937698082255,
+            "snapshot_recall": 0.79423226812159,
+            "snapshot_precision": 0.19273690183468886,
+            "snapshot_f1": 0.3101978691019787,
+            "snapshot_alert_rate": 0.08631836734693878,
+            "alert_episode_count": 2258,
+            "active_component_window_count": 47784,
+            "alerts_per_100_active": 4.725431106646576,
+            "detected_event_count": 1112,
+            "actual_event_count": 1290,
+            "event_recall": 0.862015503875969,
+            "first_warning_cycles": {
+              "count": 1112,
+              "min": 0.0,
+              "p25": 7.8365335667956515,
+              "median": 15.432335623074323,
+              "p75": 23.08631281552408,
+              "max": 29.98869968966665
+            }
+          }
+        },
+        "lightgbm": {
+          "candidate": "lgbm_15_leaves",
+          "threshold": 0.09050871757418233,
+          "internal_val": {
+            "split": "internal_val",
+            "threshold": 0.09050871757418233,
+            "n_snapshots": 22534,
+            "n_positive_snapshots": 476,
+            "roc_auc": 0.9731858084606587,
+            "pr_auc": 0.30952252523546886,
+            "snapshot_recall": 0.9411764705882353,
+            "snapshot_precision": 0.23691168693812797,
+            "snapshot_f1": 0.378538234051542,
+            "snapshot_alert_rate": 0.08391763557291204,
+            "alert_episode_count": 712,
+            "active_component_window_count": 17602,
+            "alerts_per_100_active": 4.044994886944665,
+            "detected_event_count": 428,
+            "actual_event_count": 428,
+            "event_recall": 1.0,
+            "first_warning_cycles": {
+              "count": 428,
+              "min": 0.0,
+              "p25": 8.672730839284668,
+              "median": 15.757533880569099,
+              "p75": 23.027425021716684,
+              "max": 29.9689288461027
+            }
+          },
+          "entity_test": {
+            "split": "entity_test",
+            "threshold": 0.09050871757418233,
+            "n_snapshots": 61250,
+            "n_positive_snapshots": 1283,
+            "roc_auc": 0.9744755757521661,
+            "pr_auc": 0.3283387016511526,
+            "snapshot_recall": 0.9789555728760717,
+            "snapshot_precision": 0.18590882178804027,
+            "snapshot_f1": 0.31247667620350794,
+            "snapshot_alert_rate": 0.11030204081632652,
+            "alert_episode_count": 1862,
+            "active_component_window_count": 47784,
+            "alerts_per_100_active": 3.8967018248786203,
+            "detected_event_count": 1156,
+            "actual_event_count": 1290,
+            "event_recall": 0.896124031007752,
+            "first_warning_cycles": {
+              "count": 1156,
+              "min": 0.0,
+              "p25": 11.316009710792514,
+              "median": 17.604404241619477,
+              "p75": 23.88810359129002,
+              "max": 29.98869968966665
+            }
+          }
+        }
+      }
+    },
+    "by_component": {
+      "entity_column": "component_id",
+      "train_entity_count": 5894,
+      "test_entity_count": 1473,
+      "internal_train_rows": 172291,
+      "internal_val_rows": 22599,
+      "entity_test_rows": 60324,
+      "models": {
+        "logistic_regression": {
+          "candidate": "lr_c_1",
+          "threshold": 0.7954798720690587,
+          "internal_val": {
+            "split": "internal_val",
+            "threshold": 0.7954798720690587,
+            "n_snapshots": 22599,
+            "n_positive_snapshots": 485,
+            "roc_auc": 0.9568018207433086,
+            "pr_auc": 0.23278028190363115,
+            "snapshot_recall": 0.7257731958762886,
+            "snapshot_precision": 0.2276843467011643,
+            "snapshot_f1": 0.3466272772033481,
+            "snapshot_alert_rate": 0.0684101066418868,
+            "alert_episode_count": 796,
+            "active_component_window_count": 17698,
+            "alerts_per_100_active": 4.497683354051305,
+            "detected_event_count": 409,
+            "actual_event_count": 432,
+            "event_recall": 0.9467592592592593,
+            "first_warning_cycles": {
+              "count": 409,
+              "min": 0.0,
+              "p25": 0.0,
+              "median": 11.896943357436156,
+              "p75": 21.696075243664836,
+              "max": 29.9689288461027
+            }
+          },
+          "entity_test": {
+            "split": "entity_test",
+            "threshold": 0.7954798720690587,
+            "n_snapshots": 60324,
+            "n_positive_snapshots": 1186,
+            "roc_auc": 0.9570408300429949,
+            "pr_auc": 0.2384949741787827,
+            "snapshot_recall": 0.7967959527824621,
+            "snapshot_precision": 0.19585492227979276,
+            "snapshot_f1": 0.3144235568125104,
+            "snapshot_alert_rate": 0.07998474902194815,
+            "alert_episode_count": 2042,
+            "active_component_window_count": 47090,
+            "alerts_per_100_active": 4.336377150138033,
+            "detected_event_count": 1020,
+            "actual_event_count": 1163,
+            "event_recall": 0.8770421324161651,
+            "first_warning_cycles": {
+              "count": 1020,
+              "min": 0.0,
+              "p25": 7.4419986158578695,
+              "median": 14.781257034567034,
+              "p75": 22.63624758368394,
+              "max": 29.92845970189001
+            }
+          }
+        },
+        "lightgbm": {
+          "candidate": "lgbm_15_leaves",
+          "threshold": 0.06143632214496325,
+          "internal_val": {
+            "split": "internal_val",
+            "threshold": 0.06143632214496325,
+            "n_snapshots": 22599,
+            "n_positive_snapshots": 485,
+            "roc_auc": 0.9739030366544867,
+            "pr_auc": 0.32260819178206773,
+            "snapshot_recall": 0.9711340206185567,
+            "snapshot_precision": 0.23156342182890854,
+            "snapshot_f1": 0.37395791980944815,
+            "snapshot_alert_rate": 0.09000398247710076,
+            "alert_episode_count": 770,
+            "active_component_window_count": 17698,
+            "alerts_per_100_active": 4.350774098768222,
+            "detected_event_count": 432,
+            "actual_event_count": 432,
+            "event_recall": 1.0,
+            "first_warning_cycles": {
+              "count": 432,
+              "min": 0.0,
+              "p25": 9.46742236027842,
+              "median": 16.275866636271985,
+              "p75": 22.984287979318765,
+              "max": 29.9689288461027
+            }
+          },
+          "entity_test": {
+            "split": "entity_test",
+            "threshold": 0.06143632214496325,
+            "n_snapshots": 60324,
+            "n_positive_snapshots": 1186,
+            "roc_auc": 0.9740164443448562,
+            "pr_auc": 0.339246447191152,
+            "snapshot_recall": 0.9831365935919055,
+            "snapshot_precision": 0.16633380884450785,
+            "snapshot_f1": 0.2845290385553929,
+            "snapshot_alert_rate": 0.1162058218950998,
+            "alert_episode_count": 1832,
+            "active_component_window_count": 47090,
+            "alerts_per_100_active": 3.8904225950307922,
+            "detected_event_count": 1061,
+            "actual_event_count": 1163,
+            "event_recall": 0.9122957867583835,
+            "first_warning_cycles": {
+              "count": 1061,
+              "min": 0.0,
+              "p25": 11.337374721736978,
+              "median": 17.53487111100526,
+              "p75": 24.151947150661726,
+              "max": 29.985758527380312
+            }
+          }
+        }
+      }
+    }
+  }
+}

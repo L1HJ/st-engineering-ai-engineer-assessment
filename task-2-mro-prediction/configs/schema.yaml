@@ -1,0 +1,212 @@
+# Dataset field schema (28 fields)
+# Maintains field name, type, unit, nullability, definition, and time boundary
+# Time boundary: all features must be <= snapshot_date / snapshot_cycle; the label is a future window
+
+fields:
+  - name: record_id
+    type: string
+    nullable: false
+    description: Unique snapshot record ID
+    role: id
+    model_feature: false
+
+  - name: snapshot_date
+    type: date
+    nullable: false
+    description: Snapshot date (prediction time point)
+    role: time
+    model_feature: false
+
+  - name: snapshot_cycle
+    type: integer
+    nullable: false
+    description: Cumulative flight cycles of the aircraft up to the snapshot
+    role: time
+    model_feature: true
+
+  - name: aircraft_id
+    type: string
+    nullable: false
+    description: Aircraft instance ID
+    role: id
+    model_feature: false
+
+  - name: component_id
+    type: string
+    nullable: false
+    description: Physical component instance ID (old instance retires after removal; replacements get a new ID)
+    role: id
+    model_feature: false
+
+  - name: aircraft_model
+    type: category
+    nullable: false
+    description: Aircraft model
+    role: category
+    model_feature: true
+
+  - name: component_type
+    type: category
+    nullable: false
+    description: Component type
+    role: category
+    model_feature: true
+
+  - name: operator
+    type: category
+    nullable: false
+    description: Operator
+    role: category
+    model_feature: true
+
+  - name: component_age_cycles
+    type: float
+    nullable: false
+    unit: cycles
+    description: Cumulative flight cycles since the component entered service
+    role: feature
+    model_feature: true
+
+  - name: component_age_days
+    type: float
+    nullable: false
+    unit: days
+    description: Calendar days since the component entered service
+    role: feature
+    model_feature: true
+
+  - name: tsr_cycles
+    type: float
+    nullable: false
+    unit: cycles
+    description: Flight cycles since the last repair (Time Since Repair)
+    role: feature
+    model_feature: true
+
+  - name: operating_hours_since_install
+    type: float
+    nullable: false
+    unit: hours
+    description: Cumulative operating hours since the current installation
+    role: feature
+    model_feature: true
+
+  - name: sensor_vibration
+    type: float
+    nullable: true
+    unit: mm/s
+    description: Vibration measurement
+    role: sensor
+    model_feature: true
+
+  - name: sensor_temp
+    type: float
+    nullable: true
+    unit: celsius
+    description: Operating temperature
+    role: sensor
+    model_feature: true
+
+  - name: sensor_pressure
+    type: float
+    nullable: true
+    unit: bar
+    description: Pressure
+    role: sensor
+    model_feature: true
+
+  - name: sensor_oil_debris
+    type: float
+    nullable: true
+    unit: mg/L
+    description: Oil debris / wear particle indicator
+    role: sensor
+    model_feature: true
+
+  - name: sensor_rpm_deviation
+    type: float
+    nullable: true
+    unit: percent
+    description: RPM deviation
+    role: sensor
+    model_feature: true
+
+  - name: sensor_exhaust_temp
+    type: float
+    nullable: true
+    unit: celsius
+    description: Exhaust temperature (applicable to some component types only; structurally missing otherwise)
+    role: sensor
+    model_feature: true
+
+  - name: fault_code_last
+    type: category
+    nullable: true
+    description: Most recent fault code before the snapshot (NONE means no fault)
+    role: category
+    model_feature: true
+
+  - name: fault_count_last_30
+    type: integer
+    nullable: false
+    description: Number of faults in the 30 flight cycles before the snapshot
+    role: feature
+    model_feature: true
+
+  - name: fault_severity_last
+    type: category
+    nullable: true
+    description: "Severity of the most recent fault: low/medium/high"
+    role: category
+    model_feature: true
+
+  - name: last_maint_cycles_ago
+    type: integer
+    nullable: false
+    description: Flight cycles since the most recent maintenance
+    role: feature
+    model_feature: true
+
+  - name: last_maint_type
+    type: category
+    nullable: false
+    description: "Most recent maintenance type: scheduled/unscheduled"
+    role: category
+    model_feature: true
+
+  - name: removal_count_history
+    type: integer
+    nullable: false
+    description: Historical removal count for this component position before the snapshot
+    role: feature
+    model_feature: true
+
+  - name: cumulative_faults
+    type: integer
+    nullable: false
+    description: Cumulative fault count before the snapshot
+    role: feature
+    model_feature: true
+
+  - name: flight_cycles_last_30
+    type: integer
+    nullable: false
+    unit: cycles
+    description: Flight cycles in the past 30 days (operating volume)
+    role: feature
+    model_feature: true
+
+  - name: avg_flight_hours
+    type: float
+    nullable: false
+    unit: hours
+    description: Average flight hours per flight cycle
+    role: feature
+    model_feature: true
+
+  - name: target
+    type: integer
+    nullable: false
+    description: Whether an unscheduled removal occurs within the next 30 flight cycles (1 yes / 0 no)
+    role: label
+    model_feature: false

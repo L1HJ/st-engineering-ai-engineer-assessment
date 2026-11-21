@@ -1,0 +1,133 @@
+{
+  "dataset_version": "v3",
+  "config_hash": "dcb063ae1b926e8967f9e3e0670c2bbac3028b18a506ff23b6054c571a32f66d",
+  "input_hashes": {
+    "data/raw/component_snapshots.csv": "22561ae9b1f95dc9d3fa56dfd89fc8d901f919431887ce583d8edeee7cd2fe73",
+    "data/splits/temporal/train.csv": "9d6c86dba6a4c0aaf828ce4132ae8e16c85b883c2f14c87cf941fef6da18b70c",
+    "data/splits/temporal/val.csv": "46c766faa7154b398ff5cf1b38d7a92f9baadefd8a5012101741f2c5a81cfe77",
+    "data/splits/temporal/test.csv": "e02e3a195c525f6decf2cc9754f6a1e735c759b83471f4efc30f9ff626209356",
+    "data/audit/removal_events.csv": "f82e049c893989e69080b278be85bf9e0b58b89d0c9b018fe926e4a9d1a55123",
+    "data/audit/snapshot_event_links.csv": "45509c1f224c3d263e1dda60237039727324fa6439fa87a4953dd0e18e690529",
+    "configs/schema.yaml": "ff6377ba4d23d14b13bacc1f9efd20fe02c9933428e32af97eb0e40101c1eb09",
+    "configs/modeling.yaml": "524c5d2d3b81008efefca9180ebdda124198c537532950eaa1f464a05b48ef68"
+  },
+  "features": [
+    "snapshot_cycle",
+    "aircraft_model",
+    "component_type",
+    "operator",
+    "component_age_cycles",
+    "component_age_days",
+    "tsr_cycles",
+    "operating_hours_since_install",
+    "sensor_vibration",
+    "sensor_temp",
+    "sensor_pressure",
+    "sensor_oil_debris",
+    "sensor_rpm_deviation",
+    "sensor_exhaust_temp",
+    "fault_code_last",
+    "fault_count_last_30",
+    "fault_severity_last",
+    "last_maint_cycles_ago",
+    "last_maint_type",
+    "removal_count_history",
+    "cumulative_faults",
+    "flight_cycles_last_30",
+    "avg_flight_hours"
+  ],
+  "excluded_fields": [
+    "record_id",
+    "aircraft_id",
+    "component_id",
+    "snapshot_date",
+    "target"
+  ],
+  "train_rows": 215958,
+  "train_positive_rows": 4291,
+  "random_seed": 42,
+  "dependency_versions": {
+    "python": "3.11.5",
+    "numpy": "1.26.4",
+    "pandas": "2.0.3",
+    "scikit_learn": "1.3.0",
+    "lightgbm": "4.7.0",
+    "joblib": "1.2.0"
+  },
+  "models": {
+    "logistic_regression": {
+      "candidate": "lr_c_1",
+      "threshold": 0.7953625805980529,
+      "val_metrics": {
+        "split": "val",
+        "threshold": 0.7953625805980529,
+        "n_snapshots": 28256,
+        "n_positive_snapshots": 613,
+        "roc_auc": 0.9580544508316504,
+        "pr_auc": 0.24018809484048248,
+        "snapshot_recall": 0.7455138662316476,
+        "snapshot_precision": 0.23186199898528664,
+        "snapshot_f1": 0.35371517027863775,
+        "snapshot_alert_rate": 0.06975509626274065,
+        "alert_episode_count": 988,
+        "active_component_window_count": 22094,
+        "alerts_per_100_active": 4.471802299266769,
+        "detected_event_count": 517,
+        "actual_event_count": 548,
+        "event_recall": 0.9434306569343066,
+        "first_warning_cycles": {
+          "count": 517,
+          "min": 0.0,
+          "p25": 4.1795933907351355,
+          "median": 12.45433197607963,
+          "p75": 21.95689498129559,
+          "max": 29.9689288461027
+        },
+        "candidate": "lr_c_1"
+      },
+      "model_sha256": "ce4a1ef45354f2af5ca55b53cad8764f81e881f57dbfe62dfd39f8933daf4182",
+      "n_iter": 15
+    },
+    "lightgbm": {
+      "candidate": "lgbm_15_leaves",
+      "threshold": 0.05461588446029929,
+      "val_metrics": {
+        "split": "val",
+        "threshold": 0.05461588446029929,
+        "n_snapshots": 28256,
+        "n_positive_snapshots": 613,
+        "roc_auc": 0.9723930002663297,
+        "pr_auc": 0.3144028688403573,
+        "snapshot_recall": 0.9608482871125612,
+        "snapshot_precision": 0.22645136485966935,
+        "snapshot_f1": 0.36652146857498447,
+        "snapshot_alert_rate": 0.09205124575311438,
+        "alert_episode_count": 910,
+        "active_component_window_count": 22094,
+        "alerts_per_100_active": 4.118765275640445,
+        "detected_event_count": 548,
+        "actual_event_count": 548,
+        "event_recall": 1.0,
+        "first_warning_cycles": {
+          "count": 548,
+          "min": 0.0,
+          "p25": 9.290350064181894,
+          "median": 16.219708248177994,
+          "p75": 23.057835820335526,
+          "max": 29.9689288461027
+        },
+        "candidate": "lgbm_15_leaves"
+      },
+      "model_sha256": "5042f926a273b06c94cc13276b1c96f4cfcacc2ede986b800ebd04f9b8530b2e",
+      "scale_pos_weight": 49.328128641342346,
+      "best_iteration": 2000
+    }
+  },
+  "sanity_checks_passed": true,
+  "val_internal_gate": {
+    "recall_passed": true,
+    "alerts_passed": true,
+    "passed": true,
+    "test_permitted": true
+  }
+}

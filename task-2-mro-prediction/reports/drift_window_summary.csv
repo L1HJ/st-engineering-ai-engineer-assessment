@@ -1,0 +1,5 @@
+window,rows,action_features,watch_features,operational_action_features,operational_watch_features,max_psi,max_psi_feature,operational_max_psi,operational_max_psi_feature
+train_2022,108730,3,6,0,5,1.414807,snapshot_cycle,0.20855,cumulative_faults
+train_2023,107228,2,4,0,3,2.206119,component_age_days,0.163579,cumulative_faults
+val_2024q1,28256,9,4,5,4,6.853235,component_age_days,0.51263,cumulative_faults
+test_2024q2_q3,55260,11,2,7,2,6.908637,component_age_days,0.74331,cumulative_faults

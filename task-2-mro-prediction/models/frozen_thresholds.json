@@ -1,0 +1,12 @@
+{
+  "config_hash": "dcb063ae1b926e8967f9e3e0670c2bbac3028b18a506ff23b6054c571a32f66d",
+  "selection": "Max event recall under val alerts<=4.5; ties broken by fewer alerts, then higher threshold",
+  "models": {
+    "logistic_regression": {
+      "threshold": 0.7953625805980529
+    },
+    "lightgbm": {
+      "threshold": 0.05461588446029929
+    }
+  }
+}

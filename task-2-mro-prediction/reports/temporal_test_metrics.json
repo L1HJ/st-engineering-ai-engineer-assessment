@@ -1,0 +1,64 @@
+{
+  "dataset_version": "v3",
+  "evaluation_batch": "single_frozen_temporal_test",
+  "models": {
+    "logistic_regression": {
+      "split": "test",
+      "threshold": 0.7953625805980529,
+      "n_snapshots": 55260,
+      "n_positive_snapshots": 1093,
+      "roc_auc": 0.9613357970862062,
+      "pr_auc": 0.24351044375065245,
+      "snapshot_recall": 0.817932296431839,
+      "snapshot_precision": 0.19300518134715025,
+      "snapshot_f1": 0.31231441048034936,
+      "snapshot_alert_rate": 0.08382193268186754,
+      "alert_episode_count": 1821,
+      "active_component_window_count": 43538,
+      "alerts_per_100_active": 4.182553171941752,
+      "detected_event_count": 937,
+      "actual_event_count": 972,
+      "event_recall": 0.9639917695473251,
+      "first_warning_cycles": {
+        "count": 937,
+        "min": 0.0,
+        "p25": 7.986708512685254,
+        "median": 15.421456374923764,
+        "p75": 23.007674530605073,
+        "max": 29.975066645522475
+      }
+    },
+    "lightgbm": {
+      "split": "test",
+      "threshold": 0.05461588446029929,
+      "n_snapshots": 55260,
+      "n_positive_snapshots": 1093,
+      "roc_auc": 0.9758437491887235,
+      "pr_auc": 0.3404057292078581,
+      "snapshot_recall": 0.9743824336688015,
+      "snapshot_precision": 0.20825185764567852,
+      "snapshot_f1": 0.34316094731754465,
+      "snapshot_alert_rate": 0.09254433586681143,
+      "alert_episode_count": 1526,
+      "active_component_window_count": 43538,
+      "alerts_per_100_active": 3.5049841517754605,
+      "detected_event_count": 969,
+      "actual_event_count": 972,
+      "event_recall": 0.9969135802469136,
+      "first_warning_cycles": {
+        "count": 969,
+        "min": 0.0,
+        "p25": 11.04234744239966,
+        "median": 17.78149656945334,
+        "p75": 23.904557799015492,
+        "max": 29.97992432686624
+      }
+    }
+  },
+  "formal_target": {
+    "recall_passed": true,
+    "alerts_passed": true,
+    "passed": true,
+    "conclusion": "meets expectations"
+  }
+}

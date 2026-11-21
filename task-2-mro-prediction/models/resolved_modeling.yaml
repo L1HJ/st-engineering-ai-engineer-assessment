@@ -1,0 +1,88 @@
+data:
+  raw: data/raw/component_snapshots.csv
+  temporal_train: data/splits/temporal/train.csv
+  temporal_val: data/splits/temporal/val.csv
+  temporal_test: data/splits/temporal/test.csv
+  by_aircraft_train: data/splits/by_aircraft/train.csv
+  by_aircraft_test: data/splits/by_aircraft/test.csv
+  by_component_train: data/splits/by_component/train.csv
+  by_component_test: data/splits/by_component/test.csv
+  removal_events: data/audit/removal_events.csv
+  snapshot_event_links: data/audit/snapshot_event_links.csv
+  schema: configs/schema.yaml
+prediction:
+  horizon_cycles: 30
+  cooldown_cycles: 30
+  active_window_cycles: 30
+preprocessing:
+  error_markers:
+  - -999
+  - 9999
+  negative_is_invalid_sensors:
+  - sensor_vibration
+  - sensor_temp
+  - sensor_pressure
+  - sensor_oil_debris
+  - sensor_exhaust_temp
+  signed_sensors:
+  - sensor_rpm_deviation
+  missing_category: Unknown
+  clipping_enabled: false
+models:
+  logistic_regression:
+    solver: liblinear
+    class_weight: balanced
+    max_iter: 2000
+    random_state: 42
+    candidates:
+    - name: lr_c_0_1
+      C: 0.1
+    - name: lr_c_1
+      C: 1.0
+    - name: lr_c_10
+      C: 10.0
+  lightgbm:
+    objective: binary
+    learning_rate: 0.05
+    n_estimators: 2000
+    num_leaves: 31
+    min_child_samples: 50
+    colsample_bytree: 0.9
+    subsample: 0.9
+    subsample_freq: 1
+    reg_lambda: 1.0
+    early_stopping_rounds: 100
+    eval_metric: binary_logloss
+    random_state: 42
+    n_jobs: 4
+    deterministic: true
+    candidates:
+    - name: lgbm_31_leaves
+      num_leaves: 31
+      min_child_samples: 50
+    - name: lgbm_15_leaves
+      num_leaves: 15
+      min_child_samples: 100
+threshold_search:
+  n_quantiles: 100
+  refinement_points: 40
+  val_max_alerts_per_100: 4.5
+validation_gates:
+  lightgbm_val_min_event_recall: 0.85
+  lightgbm_val_max_alerts_per_100: 4.5
+  lightgbm_test_min_event_recall: 0.8
+  lightgbm_test_max_alerts_per_100: 5.0
+sanity_checks:
+  shuffled_train_rows: 30000
+  shuffled_n_estimators: 100
+  max_shuffled_roc_auc: 0.65
+  max_shuffled_event_recall: 0.2
+  single_feature_max_roc_auc: 0.98
+runtime:
+  random_seed: 42
+  n_jobs: 4
+outputs:
+  models_dir: models
+  reports_dir: reports
+  docs_dir: docs
+  test_manifest: models/test_evaluation_manifest.json
